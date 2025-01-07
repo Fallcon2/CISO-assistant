@@ -6,7 +6,7 @@ metadata:
     app: ciso-assistant
     client: {{ .Values.clientName }}
     version: {{ include "ciso-assistant.appVersion" . }}
-    {{- include "common.labels" . | nindent 4 }}
+      {{- include "common.labels" . | nindent 4 }}
 spec:
   podManagementPolicy: OrderedReady
   replicas: 1
