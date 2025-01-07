@@ -1,0 +1,44 @@
+clientName: fallcon
+clusterDomain: test.com
+emailAdmin: fallcon@test.com
+frontendOrigin: "" # Leave empty to use default ORIGIN, or set custom value
+global:
+  # Override appVersion from Chart.yaml if needed
+  appVersion: "v2.0.5" # When empty, will use Chart.yaml's appVersion
+
+email:
+  defaultFrom: no-reply@mail.com
+  debug: false
+  primary:
+    host: primary.mail.com
+    user: apikey
+    password: "primary_password_here"
+    port: 587
+    useTls: true
+  rescue:
+    host: smtp.mail.com
+    user: username
+    password: "rescue_password_here"
+    port: 587
+    useTls: true
+
+bodySizeLimit: "50000000"
+
+image:
+  backend:
+    repository: ghcr.io/intuitem/ciso-assistant-community/backend
+    # Use .Chart.AppVersion if global.appVersion is not set
+    tag: "{{ default .Chart.AppVersion .Values.global.appVersion }}"
+    pullPolicy: Always
+  frontend:
+    repository: ghcr.io/intuitem/ciso-assistant-community/frontend
+    tag: "{{ default .Chart.AppVersion .Values.global.appVersion }}"
+    pullPolicy: Always
+  caddy:
+    repository: caddy
+    tag: "2.9"
+    pullPolicy: IfNotPresent
+
+persistence:
+  size: 5Gi
+  accessMode: ReadWriteOnce
