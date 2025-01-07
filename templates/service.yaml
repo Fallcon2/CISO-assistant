@@ -4,7 +4,7 @@ metadata:
   name: ciso-assistant-{{ .Values.clientName }}
   labels:
     client: {{ .Values.clientName }}
-    {{- include "common.labels" . | nindent 4 }}
+      {{- include "common.labels" . | nindent 4 }}
 spec:
   ports:
   - name: http
